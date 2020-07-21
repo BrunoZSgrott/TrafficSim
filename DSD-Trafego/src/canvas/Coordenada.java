@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class Coordenada{
+public class Coordenada {
 
     public int linha;
     public int coluna;
@@ -37,13 +37,13 @@ public class Coordenada{
         return ((this.linha == c.linha) && (this.coluna == c.coluna));
     }
 
-    public void render(Graphics g, BufferedImage image){
+    public void render(Graphics g, BufferedImage image) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, this.coluna*32, this.linha*32, null);        
+        g2.drawImage(image, this.coluna * 32, this.linha * 32, null);
     }
-    
-    public Coordenada move(String s){
-        switch(s){
+
+    public Coordenada move(String s) {
+        switch (s) {
             case "u":
                 linha--;
                 break;
@@ -61,5 +61,5 @@ public class Coordenada{
         }
         return this;
     }
-    
+
 }

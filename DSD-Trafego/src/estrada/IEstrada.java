@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canvas;
-
-import roadMap.RoadMapFactory;
+package estrada;
 
 /**
  *
  * @author Bruno Zilli Sgrott
  */
-interface Observer {
+interface IEstrada {
 
-    public RoadMapFactory getLevel();
+    public int getLinha();
 
-    public void setSize(int x, int y);
+    public int getColuna();
 
-    public void init();
+    public void setLinha(int i);
 
-    public void render();
+    public void setColuna(int i);
 }

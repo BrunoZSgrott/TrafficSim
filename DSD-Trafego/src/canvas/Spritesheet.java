@@ -30,7 +30,7 @@ public class Spritesheet {
     }
 
     public BufferedImage getSprite(int x, int y) {
-        return spritesheet.getSubimage(x * Main.PIXELSIZE, y * Main.PIXELSIZE, Main.PIXELSIZE, Main.PIXELSIZE);
+        return spritesheet.getSubimage(x * Display.PIXELSIZE, y * Display.PIXELSIZE, Display.PIXELSIZE, Display.PIXELSIZE);
     }
 
     public BufferedImage getSprite(int x, int y, int width, int heigth) {

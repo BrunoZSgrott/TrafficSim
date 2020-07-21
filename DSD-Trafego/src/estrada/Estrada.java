@@ -3,8 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canvas;
+package estrada;
 
+import estrada.strategy.EstradaStrategyDown;
+import estrada.strategy.EstradaStrategyLeft;
+import estrada.strategy.EstradaStrategyCrossingUp;
+import estrada.strategy.EstradaStrategyCrossingRight;
+import estrada.strategy.EstradaStrategyUp;
+import estrada.strategy.EstradaStrategyCrossingLeftUp;
+import estrada.strategy.EstradaStrategyEmpty;
+import estrada.strategy.EstradaStrategyCrossingRightDown;
+import estrada.strategy.EstradaStrategyCrossingUpRight;
+import estrada.strategy.EstradaStrategyCrossingDownLeft;
+import estrada.strategy.EstradaStrategyRight;
+import estrada.strategy.EstradaStrategyCrossingDown;
+import estrada.strategy.EstradaStrategy;
+import estrada.strategy.EstradaStrategyCrossingLeft;
+import canvas.IRenderable;
+import canvas.Display;
+import vehicle.Vehicle;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -13,11 +30,12 @@ import java.awt.image.BufferedImage;
  *
  * @author Bruno Zilli Sgrott
  */
-public class Estrada {
+public class Estrada implements IEstrada, IRenderable {
 
     private int linha;
     private int coluna;
     private int type;
+    private Vehicle vehicle;
 
     private final EstradaStrategy strategy;
 
@@ -77,11 +95,30 @@ public class Estrada {
 
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(getImage(), this.coluna * Main.PIXELSIZE, this.linha * Main.PIXELSIZE, null);
+        g2.drawImage(getImage(), this.coluna * Display.PIXELSIZE, this.linha * Display.PIXELSIZE, null);
+        if (vehicle != null) {
+            vehicle.render(g);
+        }
     }
 
     protected BufferedImage getImage() {
         return this.strategy.getImage();
+    }
+
+    public int getColuna() {
+        return coluna;
+    }
+
+    public void setColuna(int coluna) {
+        this.coluna = coluna;
+    }
+
+    public int getLinha() {
+        return linha;
+    }
+
+    public void setLinha(int linha) {
+        this.linha = linha;
     }
 
 }
