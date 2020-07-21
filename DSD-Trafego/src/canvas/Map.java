@@ -10,5 +10,5 @@ package canvas;
  * @author Bruno Zilli Sgrott
  */
 public class Map {
-    
+
 }

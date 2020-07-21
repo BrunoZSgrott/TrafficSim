@@ -3,23 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canvas;
+package estrada.strategy;
 
+import estrada.Estrada;
+import canvas.Spritesheet;
 import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Bruno Zilli Sgrott
  */
-public class EstradaStrategyCrossingLeftUp extends EstradaStrategy {
+public class EstradaStrategyCrossingUp extends EstradaStrategy {
 
-    public EstradaStrategyCrossingLeftUp(Estrada estrada) {
+    public EstradaStrategyCrossingUp(Estrada estrada) {
         super(estrada);
     }
 
     @Override
     public BufferedImage getImage() {
-        return Spritesheet.getInstance().getSprite(0, 2);
+        return Spritesheet.getInstance().getSprite(0, 1);
     }
 
 }

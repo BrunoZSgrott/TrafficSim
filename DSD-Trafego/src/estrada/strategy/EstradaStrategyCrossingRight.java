@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canvas;
+package estrada.strategy;
 
+import estrada.Estrada;
+import canvas.Spritesheet;
 import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Bruno Zilli Sgrott
  */
-public class EstradaStrategyRight extends EstradaStrategy {
+public class EstradaStrategyCrossingRight extends EstradaStrategy {
 
-    public EstradaStrategyRight(Estrada estrada) {
+    public EstradaStrategyCrossingRight(Estrada estrada) {
         super(estrada);
     }
 

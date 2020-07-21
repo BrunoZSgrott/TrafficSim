@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canvas;
+package estrada.strategy;
 
 import java.awt.image.BufferedImage;
 
@@ -11,12 +11,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Bruno Zilli Sgrott
  */
-abstract class EstradaStrategy implements InterfaceEstradaStrategy {
+interface InterfaceEstradaStrategy {
 
-    private Estrada estrada;
-
-    public EstradaStrategy(Estrada estrada) {
-        this.estrada = estrada;
-    }
-
+    BufferedImage getImage();
 }

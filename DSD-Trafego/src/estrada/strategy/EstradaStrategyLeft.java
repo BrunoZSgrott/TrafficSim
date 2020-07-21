@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canvas;
+package estrada.strategy;
 
+import estrada.Estrada;
+import canvas.Spritesheet;
 import java.awt.image.BufferedImage;
 
 /**
@@ -21,5 +23,5 @@ public class EstradaStrategyLeft extends EstradaStrategy {
     public BufferedImage getImage() {
         return Spritesheet.getInstance().getSprite(2, 1);
     }
-    
+
 }

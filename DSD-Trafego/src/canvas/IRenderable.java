@@ -5,13 +5,13 @@
  */
 package canvas;
 
-import java.awt.image.BufferedImage;
+import java.awt.Graphics;
 
 /**
  *
  * @author Bruno Zilli Sgrott
  */
-interface InterfaceEstradaStrategy {
+public interface IRenderable {
 
-    BufferedImage getImage();
+    public void render(Graphics g);
 }

@@ -3,23 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canvas;
+package vehicle.strategy;
 
+import canvas.Spritesheet;
+import estrada.Estrada;
 import java.awt.image.BufferedImage;
+import vehicle.Vehicle;
 
 /**
  *
  * @author Bruno Zilli Sgrott
  */
-public class EstradaStrategyDefault extends EstradaStrategy {
+public class VehicleStrategyUp extends VehicleStrategy {
 
-    public EstradaStrategyDefault(Estrada estrada) {
-        super(estrada);
+    public VehicleStrategyUp(Vehicle vehicle) {
+        super(vehicle);
     }
 
     @Override
     public BufferedImage getImage() {
         return Spritesheet.getInstance().getSprite(0, 3);
+    }
+
+    @Override
+    public void move(Estrada estrada) {
     }
 
 }
