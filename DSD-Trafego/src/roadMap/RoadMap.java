@@ -29,6 +29,10 @@ public class RoadMap {
         mapa[x][y] = value;
     }
 
+    public int getValue(int x, int y) {
+        return mapa[x][y];
+    }
+
     public void clear() {
         mapa = new int[linha][coluna];
     }

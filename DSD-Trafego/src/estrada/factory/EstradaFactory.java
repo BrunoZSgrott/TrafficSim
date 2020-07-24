@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package estrada;
+package estrada.factory;
 
-import java.awt.Point;
+import estrada.AbstractEstrada;
 
 /**
  *
- * @author Bruno Zilli Sgrott
+ * @author Vinicius Catafesta
  */
-interface IEstrada {
+abstract class EstradaFactory {
 
-    EstradaType getType();
-    
-    Point getPoint();
-    
-    void accept(IEstradaVisitor visitor);
+    public abstract AbstractEstrada create();
+
 }

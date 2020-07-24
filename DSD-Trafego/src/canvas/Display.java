@@ -25,7 +25,7 @@ public class Display extends Canvas implements Observer, Runnable {
     private final int SCALE = 1;
     private BufferedImage image;
 
-    private MainController controller;
+    private IDisplayController controller;
 
     private int WIDTH;
     private int HEIGHT;
