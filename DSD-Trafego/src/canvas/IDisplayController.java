@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package estrada;
-
-import java.awt.Point;
+package canvas;
 
 /**
  *
  * @author Bruno Zilli Sgrott
  */
-interface IEstrada {
+interface IDisplayController extends Subject {
 
-    EstradaType getType();
-    
-    Point getPoint();
-    
-    void accept(IEstradaVisitor visitor);
+    void start();
+
+    void run();
 }

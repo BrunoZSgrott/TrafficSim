@@ -19,17 +19,21 @@ import java.util.logging.Logger;
  *
  * @author Bruno Zilli Sgrott
  */
-public class MainController implements Runnable, Subject {
+public class MainController implements IDisplayController, Runnable {
 
     private Thread thread;
+    private Field field;
     private RoadMap roadMap;
     private final double FPS = 60.0;
     private boolean isRunning;
 
     public MainController() {
         try {
+            FieldFactory fieldFactory = new FieldFactory();
             RoadMapFactory RoadMapFactory = new RoadMapFactory();
             this.roadMap = RoadMapFactory.create(new BufferedReader(new FileReader(RoadMapFactory.getPathForLevel(3))));
+            field = fieldFactory.create(this.roadMap);
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }

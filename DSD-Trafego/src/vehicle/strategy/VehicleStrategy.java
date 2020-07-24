@@ -5,13 +5,13 @@
  */
 package vehicle.strategy;
 
-import estrada.Estrada;
+import estrada.AbstractEstrada;
 import java.awt.image.BufferedImage;
 import vehicle.Vehicle;
 
 /**
  *
- * @author Bruno Zilli Sgrott
+ * @author Vinicius Catafesta
  */
 public abstract class VehicleStrategy {
 
@@ -23,5 +23,5 @@ public abstract class VehicleStrategy {
 
     public abstract BufferedImage getImage();
 
-    public abstract void move(Estrada estrada);
+    public abstract void move(AbstractEstrada estrada);
 }

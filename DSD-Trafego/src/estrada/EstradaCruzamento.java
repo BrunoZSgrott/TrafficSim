@@ -5,17 +5,14 @@
  */
 package estrada;
 
-import java.awt.Point;
-
 /**
  *
- * @author Bruno Zilli Sgrott
+ * @author Vinicius Catafestas
  */
-interface IEstrada {
-
-    EstradaType getType();
+public class EstradaCruzamento extends AbstractEstrada {
     
-    Point getPoint();
+    public EstradaCruzamento(int type) {
+        super(type);
+    }
     
-    void accept(IEstradaVisitor visitor);
 }

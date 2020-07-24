@@ -6,13 +6,13 @@
 package vehicle.strategy;
 
 import canvas.Spritesheet;
-import estrada.Estrada;
+import estrada.AbstractEstrada;
 import java.awt.image.BufferedImage;
 import vehicle.Vehicle;
 
 /**
  *
- * @author Bruno Zilli Sgrott
+ * @author Vinicius Catafesta
  */
 public class VehicleStrategyRight extends VehicleStrategy {
 
@@ -26,6 +26,6 @@ public class VehicleStrategyRight extends VehicleStrategy {
     }
 
     @Override
-    public void move(Estrada estrada) {
+    public void move(AbstractEstrada estrada) {
     }
 }

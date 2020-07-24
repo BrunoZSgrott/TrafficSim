@@ -5,44 +5,28 @@
  */
 package vehicle;
 
-import vehicle.strategy.VehicleStrategyDown;
-import vehicle.strategy.VehicleStrategy;
 import canvas.IRenderable;
-import canvas.Display;
-import estrada.Estrada;
+import estrada.AbstractEstrada;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Bruno Zilli Sgrott
+ * @author Vinicius Catafesta
  */
 public class Vehicle implements IRenderable {
 
-    private Estrada estrada;
-    private VehicleStrategy strategy;
+    private AbstractEstrada estrada;
 
     public Vehicle() {
-        this.strategy = new VehicleStrategyDown(this);
     }
 
     @Override
     public void render(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(getImage(), estrada.getColuna() * Display.PIXELSIZE, estrada.getLinha() * Display.PIXELSIZE, null);
-    }
-
-    private BufferedImage getImage() {
-        return this.strategy.getImage();
+//        Graphics2D g2 = (Graphics2D) g;
+//        g2.drawImage(getImage(), estrada.getColuna() * Display.PIXELSIZE, estrada.getLinha() * Display.PIXELSIZE, null);
     }
 
     public void tick(int currentFrame) {
-        move();
-    }
-
-    private void move() {
-        this.strategy.move(this.estrada);
     }
 
 }

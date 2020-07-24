@@ -5,7 +5,7 @@
  */
 package estrada.strategy;
 
-import estrada.Estrada;
+import estrada.AbstractEstrada;
 import java.awt.image.BufferedImage;
 
 /**
@@ -14,9 +14,9 @@ import java.awt.image.BufferedImage;
  */
 public abstract class EstradaStrategy implements InterfaceEstradaStrategy {
 
-    private Estrada estrada;
+    private AbstractEstrada estrada;
 
-    public EstradaStrategy(Estrada estrada) {
+    public EstradaStrategy(AbstractEstrada estrada) {
         this.estrada = estrada;
     }
 
