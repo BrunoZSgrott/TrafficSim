@@ -5,7 +5,7 @@
  */
 package estrada;
 
-import estrada.strategy.*;
+import canvas.Display;
 import vehicle.Vehicle;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,29 +18,24 @@ import java.awt.image.BufferedImage;
  */
 public abstract class AbstractEstrada implements IEstrada {
 
-    private Point point;
     private Vehicle vehicle;
     private EstradaType tipo;
-    private boolean previous;
-
+    private boolean possuiAnterior;
     private Point coordenada;
-    private int type;
 
     public AbstractEstrada(EstradaType type) {
         this.tipo = type;
     }
 
-    public AbstractEstrada(int type) {
-        this.type = type;
-    }
-
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-//        g2.drawImage(getImage(), this.coluna * Display.PIXELSIZE, this.linha * Display.PIXELSIZE, null);
+        g2.drawImage(getImage(), this.getPoint().y * Display.PIXELSIZE, this.getPoint().x * Display.PIXELSIZE, null);
         if (vehicle != null) {
             vehicle.render(g);
         }
     }
+    
+    abstract BufferedImage getImage();
 
     @Override
     public EstradaType getType() {
@@ -52,9 +47,12 @@ public abstract class AbstractEstrada implements IEstrada {
         return coordenada;
     }
 
-    @Override
-    public void accept(IEstradaVisitor visitor) {
+    public void setPoint(Point point) {
+        coordenada = point;
+    }
 
+    public void setPossuiAnterior(boolean b) {
+        this.possuiAnterior = b;
     }
 
 }

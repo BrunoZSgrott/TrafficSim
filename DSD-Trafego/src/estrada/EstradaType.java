@@ -11,6 +11,7 @@ package estrada;
  */
 public enum EstradaType {
 
+    ESTRADA_EMPTY(0, "Nada"),
     ESTRADA_UP(1, "Cima"),
     ESTRADA_RIGHT(2, "Direita"),
     ESTRADA_DOWN(3, "Baixo"),
@@ -30,5 +31,22 @@ public enum EstradaType {
     private EstradaType(int codigo, String name) {
         this.codigo = codigo;
         this.name = name;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static EstradaType getTypeFromInt(int i) {
+        for (EstradaType type : values()) {
+            if (type.getCodigo() == i) {
+                return type;
+            }
+        }
+        return null;
     }
 }

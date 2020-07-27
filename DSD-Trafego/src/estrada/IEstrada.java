@@ -5,6 +5,7 @@
  */
 package estrada;
 
+import estrada.visitor.IVisitor;
 import java.awt.Point;
 
 /**
@@ -14,8 +15,8 @@ import java.awt.Point;
 interface IEstrada {
 
     EstradaType getType();
-    
+
     Point getPoint();
-    
-    void accept(IEstradaVisitor visitor);
+
+    void accept(IVisitor visitor);
 }

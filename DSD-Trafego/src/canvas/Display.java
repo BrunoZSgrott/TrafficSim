@@ -7,11 +7,11 @@ package canvas;
 
 import roadMap.RoadMapFactory;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -23,17 +23,16 @@ public class Display extends Canvas implements Observer, Runnable {
     public static final int PIXELSIZE = 32;
     public static JFrame frame;
     private final int SCALE = 1;
-    private BufferedImage image;
 
+    private List<IRenderable> renderable;
     private IDisplayController controller;
 
-    private int WIDTH;
-    private int HEIGHT;
     private RoadMapFactory mapFactory;
 
     public Display() {
         mapFactory = new RoadMapFactory();
         controller = new MainController();
+        renderable = new ArrayList<>();
         controller.addObservador(this);
     }
 
@@ -47,12 +46,10 @@ public class Display extends Canvas implements Observer, Runnable {
             this.createBufferStrategy(1);
             return;
         }
-        Graphics g = image.getGraphics();
-        g.setColor(new Color(19, 19, 19));
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-        g.dispose();
-        g = bs.getDrawGraphics();
-        g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+        Graphics g = bs.getDrawGraphics();
+        for (int i = 0; i < renderable.size(); i++) {
+            renderable.get(i).render(g);
+        }
         bs.show();
     }
 
@@ -68,10 +65,9 @@ public class Display extends Canvas implements Observer, Runnable {
 
     @Override
     public void setSize(int x, int y) {
-        HEIGHT = PIXELSIZE * x;
-        WIDTH = PIXELSIZE * (y - 1);
+        int HEIGHT = PIXELSIZE * x;
+        int WIDTH = PIXELSIZE * (y - 1);
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-        image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     }
 
     @Override
@@ -81,6 +77,11 @@ public class Display extends Canvas implements Observer, Runnable {
 
     public synchronized void start() {
         controller.start();
+    }
+
+    @Override
+    public void addRenderable(IRenderable render) {
+        renderable.add(render);
     }
 
 }

@@ -33,7 +33,6 @@ public class MainController implements IDisplayController, Runnable {
             RoadMapFactory RoadMapFactory = new RoadMapFactory();
             this.roadMap = RoadMapFactory.create(new BufferedReader(new FileReader(RoadMapFactory.getPathForLevel(3))));
             field = fieldFactory.create(this.roadMap);
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -46,6 +45,7 @@ public class MainController implements IDisplayController, Runnable {
         observers.add(obs);
         notifyViewSize();
         notifyViewStart();
+        notifyNewRenderable(field);
     }
 
     @Override
@@ -77,6 +77,12 @@ public class MainController implements IDisplayController, Runnable {
         });
     }
 
+    protected void notifyNewRenderable(IRenderable render) {
+        observers.forEach((o) -> {
+            o.addRenderable(render);
+        });
+    }
+
     protected void notifyViewStart() {
         observers.forEach((o) -> {
             o.init();
@@ -84,6 +90,7 @@ public class MainController implements IDisplayController, Runnable {
     }
 
     public void tick() {
+
     }
 
     public void run() {

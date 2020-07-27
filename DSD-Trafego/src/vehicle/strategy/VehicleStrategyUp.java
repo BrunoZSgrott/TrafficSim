@@ -12,7 +12,7 @@ import vehicle.Vehicle;
 
 /**
  *
- * @author Vinicius Catafesta
+ * @author Bruno Zilli Sgrott
  */
 public class VehicleStrategyUp extends VehicleStrategy {
 

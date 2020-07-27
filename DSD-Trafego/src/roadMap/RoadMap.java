@@ -5,6 +5,8 @@
  */
 package roadMap;
 
+import java.awt.Point;
+
 /**
  *
  * @author Bruno Zilli Sgrott

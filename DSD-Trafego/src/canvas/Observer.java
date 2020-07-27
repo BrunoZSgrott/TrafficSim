@@ -20,4 +20,6 @@ interface Observer {
     public void init();
 
     public void render();
+
+    public void addRenderable(IRenderable render);
 }

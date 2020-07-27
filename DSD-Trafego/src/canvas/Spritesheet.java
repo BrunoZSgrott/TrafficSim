@@ -23,7 +23,7 @@ public class Spritesheet {
 
     public Spritesheet() {
         try {
-            spritesheet = ImageIO.read(getClass().getResource("/res/spritesheet.png"));
+            spritesheet = ImageIO.read(getClass().getResource("/resources/spritesheet.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -11,7 +11,7 @@ import vehicle.Vehicle;
 
 /**
  *
- * @author Vinicius Catafesta
+ * @author Bruno Zilli Sgrott
  */
 public abstract class VehicleStrategy {
 
