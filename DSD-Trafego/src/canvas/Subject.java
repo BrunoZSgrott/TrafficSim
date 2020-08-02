@@ -9,7 +9,7 @@ package canvas;
  *
  * @author Bruno Zilli Sgrott
  */
-interface Subject {
+public interface Subject {
 
     void addObservador(Observer obs);
 

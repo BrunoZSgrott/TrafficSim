@@ -10,35 +10,37 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.scene.input.KeyCode;
+import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import roadMap.RoadMap;
+import vehicle.Vehicle;
 
 /**
  *
  * @author Bruno Zilli Sgrott
  */
-public class Display extends Canvas implements Observer, Runnable {
+public class Display extends Canvas implements Observer, Runnable, KeyListener {
 
     public static final int PIXELSIZE = 32;
     public static JFrame frame;
     private final int SCALE = 1;
-    private BufferedImage image;
 
+    private List<IRenderable> renderable;
     private IDisplayController controller;
 
-    private int WIDTH;
-    private int HEIGHT;
-    private RoadMapFactory mapFactory;
-
-    public Display() {
-        mapFactory = new RoadMapFactory();
-        controller = new MainController();
+    public Display(Configuracao config) {
+        controller = new MainController(config);
+        renderable = new ArrayList<>();
         controller.addObservador(this);
-    }
-
-    public RoadMapFactory getLevel() {
-        return mapFactory;
     }
 
     public void render() {
@@ -47,12 +49,10 @@ public class Display extends Canvas implements Observer, Runnable {
             this.createBufferStrategy(1);
             return;
         }
-        Graphics g = image.getGraphics();
-        g.setColor(new Color(19, 19, 19));
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-        g.dispose();
-        g = bs.getDrawGraphics();
-        g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+        Graphics g = bs.getDrawGraphics();
+        for (int i = 0; i < renderable.size(); i++) {
+            renderable.get(i).render(g);
+        }
         bs.show();
     }
 
@@ -68,10 +68,9 @@ public class Display extends Canvas implements Observer, Runnable {
 
     @Override
     public void setSize(int x, int y) {
-        HEIGHT = PIXELSIZE * x;
-        WIDTH = PIXELSIZE * (y - 1);
+        int HEIGHT = PIXELSIZE * (x);
+        int WIDTH = PIXELSIZE * (y);
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-        image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     }
 
     @Override
@@ -81,6 +80,42 @@ public class Display extends Canvas implements Observer, Runnable {
 
     public synchronized void start() {
         controller.start();
+    }
+
+    @Override
+    public void addRenderable(IRenderable render) {
+        renderable.add(render);
+        renderable.sort((o1, o2) -> {
+            if (o1 instanceof Vehicle) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyChar() == 'z'){
+            controller.pause();
+        }
+        if(e.getKeyChar() == 'x'){
+            
+        }
+        if(e.getKeyChar() == 'c'){
+            
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

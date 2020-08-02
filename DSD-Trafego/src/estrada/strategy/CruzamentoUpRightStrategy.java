@@ -5,6 +5,7 @@
  */
 package estrada.strategy;
 
+import canvas.Spritesheet;
 import estrada.AbstractEstrada;
 import java.awt.image.BufferedImage;
 
@@ -12,12 +13,21 @@ import java.awt.image.BufferedImage;
  *
  * @author Bruno Zilli Sgrott
  */
-public abstract class EstradaStrategy implements InterfaceEstradaStrategy {
+public class CruzamentoUpRightStrategy implements IEstradaStrategy {
 
     private AbstractEstrada estrada;
 
-    public EstradaStrategy(AbstractEstrada estrada) {
+    public CruzamentoUpRightStrategy(AbstractEstrada estrada) {
         this.estrada = estrada;
     }
 
+    @Override
+    public AbstractEstrada getEstrada() {
+        return this.estrada;
+    }
+    
+    @Override
+    public BufferedImage getImage() {
+        return Spritesheet.getInstance().getSpriteCruzamentoUpRight();
+    }
 }

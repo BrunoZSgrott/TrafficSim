@@ -12,7 +12,7 @@ import vehicle.Vehicle;
 
 /**
  *
- * @author Vinicius Catafesta
+ * @author Bruno Zilli Sgrott
  */
 public class VehicleStrategyUp extends VehicleStrategy {
 
@@ -22,7 +22,7 @@ public class VehicleStrategyUp extends VehicleStrategy {
 
     @Override
     public BufferedImage getImage() {
-        return Spritesheet.getInstance().getSprite(0, 3);
+        return Spritesheet.getInstance().getSprite(3, 0);
     }
 
     @Override
