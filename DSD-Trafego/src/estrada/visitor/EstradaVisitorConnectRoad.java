@@ -1,10 +1,14 @@
-package canvas;
+package estrada.visitor;
 
+import estrada.factory.EstradaCruzamentoMovementFactory;
+import canvas.Field;
 import estrada.AbstractEstrada;
+import estrada.EstradaCaminho;
 import estrada.EstradaCruzamento;
 import estrada.EstradaEmpty;
 import estrada.EstradaNormal;
-import estrada.visitor.IVisitor;
+import estrada.IEstrada;
+import estrada.factory.EstradaNormalMovementFactory;
 import java.awt.Point;
 import java.util.List;
 
@@ -23,7 +27,7 @@ public class EstradaVisitorConnectRoad implements IVisitor {
     @Override
     public void visitEstradaNormal(EstradaNormal estrada) throws Exception {
         Point point = new EstradaNormalMovementFactory().getInstance().create(estrada);
-        AbstractEstrada proximaEstrada;
+        IEstrada proximaEstrada;
         try {
             proximaEstrada = field.getEstrada(point);
             proximaEstrada.setPossuiAnterior(true);
@@ -38,21 +42,26 @@ public class EstradaVisitorConnectRoad implements IVisitor {
     @Override
     public void visitCruzamento(EstradaCruzamento estrada) throws Exception {
         List<Point> nextPoints = new EstradaCruzamentoMovementFactory().getInstance().create(estrada);
-        List<AbstractEstrada> nextCells;
+        List<IEstrada> proximas;
         try {
-            nextCells = field.getEstrada(nextPoints);
-            for (AbstractEstrada nextCell : nextCells) {
-                nextCell.setPossuiAnterior(true);
+            proximas = field.getEstrada(nextPoints);
+            for (IEstrada estradaProxima : proximas) {
+                estradaProxima.setPossuiAnterior(true);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            nextCells = null;
+            proximas = null;
         }
-        estrada.setProximas(nextCells);
+        estrada.setProximas(proximas);
     }
 
     @Override
-    public void visitEStradaVazia(EstradaEmpty estrada) throws Exception {
+    public void visitEstradaVazia(EstradaEmpty estrada) throws Exception {
 
+    }
+
+    @Override
+    public void visitEstradaCaminho(EstradaCaminho estrada) throws Exception {
+        return;
     }
 
 }

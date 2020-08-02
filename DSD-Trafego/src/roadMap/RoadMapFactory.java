@@ -23,7 +23,8 @@ public class RoadMapFactory {
                 while (reader.ready()) {
                     String currentLine = reader.readLine();
                     String type = "";
-                    for (char c : currentLine.toCharArray()) {
+                    char[] array = currentLine.toCharArray();
+                    for (char c : array) {
                         if (c == '\t') {
                             roadMap.add(i, j, Integer.parseInt(type));
                             j++;
@@ -31,6 +32,9 @@ public class RoadMapFactory {
                             continue;
                         } else {
                             type += c;
+                            if (j == (roadMap.getColuna() - 1)) {
+                                roadMap.add(i, j, Integer.parseInt(type));
+                            }
                         }
                     }
                     type = "";

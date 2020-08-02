@@ -18,7 +18,6 @@ public class EstradaFactory {
 
     private static EstradaFactory instance;
     private HashMap<EstradaType, IEstradaFactory> fabricas;
-
     public static synchronized EstradaFactory getInstance() {
         if (instance == null) {
             instance = new EstradaFactory();

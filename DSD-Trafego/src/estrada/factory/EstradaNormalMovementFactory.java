@@ -1,4 +1,4 @@
-package canvas;
+package estrada.factory;
 
 import estrada.EstradaNormal;
 import java.awt.Point;
@@ -7,7 +7,7 @@ import java.awt.Point;
  *
  * @author Bruno Zilli Sgrott
  */
-class EstradaNormalMovementFactory {
+public class EstradaNormalMovementFactory {
 
     private static EstradaNormalMovementFactory instance;
 

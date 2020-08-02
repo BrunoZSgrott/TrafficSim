@@ -5,8 +5,11 @@
  */
 package estrada;
 
-import canvas.Spritesheet;
+import canvas.Display;
+import canvas.IRenderable;
 import estrada.visitor.IVisitor;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +20,10 @@ import java.util.logging.Logger;
  *
  * @author Bruno Zilli Sgrott
  */
-public class EstradaCruzamento extends AbstractEstrada {
+public class EstradaCruzamento extends AbstractEstrada implements IRenderable {
 
-    private List<AbstractEstrada> proximas;
+    private List<IEstrada> proximas;
+    private List<IEstrada> caminho;
 
     public EstradaCruzamento(EstradaType type) {
         super(type);
@@ -28,19 +32,36 @@ public class EstradaCruzamento extends AbstractEstrada {
 
     public void accept(IVisitor visitor) {
         try {
-            visitor.visitCruzamento(this);
+            if (getMutex() != null) {
+                getMutex().execute(() -> {
+                    visitor.visitCruzamento(this);
+                });
+            } else {
+                visitor.visitCruzamento(this);
+            }
         } catch (Exception ex) {
             Logger.getLogger(EstradaCruzamento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void setProximas(List<AbstractEstrada> estrada) {
+    public void setProximas(List<IEstrada> estrada) {
         this.proximas = estrada;
     }
 
-    @Override
+    public List<IEstrada> getProximas() {
+        return proximas;
+    }
+
+    public List<IEstrada> getCaminho() {
+        return caminho;
+    }
+
+    public void setCaminho(List<IEstrada> caminho) {
+        this.caminho = caminho;
+    }
+
     BufferedImage getImage() {
-        return Spritesheet.getInstance().getSprite(0, 1);
+        return this.getStrategy().getImage();
     }
 
 }

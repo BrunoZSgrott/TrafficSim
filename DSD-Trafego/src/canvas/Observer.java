@@ -11,9 +11,7 @@ import roadMap.RoadMapFactory;
  *
  * @author Bruno Zilli Sgrott
  */
-interface Observer {
-
-    public RoadMapFactory getLevel();
+interface Observer extends Runnable{
 
     public void setSize(int x, int y);
 

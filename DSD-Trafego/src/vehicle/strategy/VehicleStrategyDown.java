@@ -22,7 +22,7 @@ public class VehicleStrategyDown extends VehicleStrategy {
 
     @Override
     public BufferedImage getImage() {
-        return Spritesheet.getInstance().getSprite(0, 1);
+        return Spritesheet.getInstance().getSprite(1, 0);
     }
 
     @Override

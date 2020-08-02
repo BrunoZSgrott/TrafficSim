@@ -22,8 +22,8 @@ public enum EstradaType {
     CROSS_LEFT(8, "Cruzamento para Esquerda"),
     CROSS_UP_RIGHT(9, "Cruzamento para Cima e Direita"),
     CROSS_UP_LEFT(10, "Cruzamento para Cima e Esquerda"),
-    CROSS_DOWN_LEFT(11, "Cruzamento para Baixo e Esquerda"),
-    CROSS_DOWN_RIGHT(12, "Cruzamento para Baixo e Direita");
+    CROSS_DOWN_RIGHT(11, "Cruzamento para Baixo e Direita"),
+    CROSS_DOWN_LEFT(12, "Cruzamento para Baixo e Esquerda");
 
     private String name;
     private int codigo;

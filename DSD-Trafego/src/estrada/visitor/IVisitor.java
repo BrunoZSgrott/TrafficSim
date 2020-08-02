@@ -1,5 +1,6 @@
 package estrada.visitor;
 
+import estrada.EstradaCaminho;
 import estrada.EstradaCruzamento;
 import estrada.EstradaEmpty;
 import estrada.EstradaNormal;
@@ -14,5 +15,7 @@ public interface IVisitor {
 
     void visitCruzamento(EstradaCruzamento estrada) throws Exception;
 
-    void visitEStradaVazia(EstradaEmpty estrada) throws Exception;
+    void visitEstradaVazia(EstradaEmpty estrada) throws Exception;
+
+    void visitEstradaCaminho(EstradaCaminho estrada) throws Exception;
 }

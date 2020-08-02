@@ -5,8 +5,13 @@
  */
 package estrada;
 
+import canvas.Display;
+import canvas.IRenderable;
+import canvas.MainController;
 import canvas.Spritesheet;
 import estrada.visitor.IVisitor;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,9 +20,9 @@ import java.util.logging.Logger;
  *
  * @author Vinicius Catafesta
  */
-public class EstradaNormal extends AbstractEstrada {
+public class EstradaNormal extends AbstractEstrada implements IRenderable {
 
-    private AbstractEstrada proxima;
+    private IEstrada proxima;
 
     public EstradaNormal(EstradaType type) {
         super(type);
@@ -26,19 +31,30 @@ public class EstradaNormal extends AbstractEstrada {
     @Override
     public void accept(IVisitor visitor) {
         try {
-            visitor.visitEstradaNormal(this);
+            if (getMutex() != null && !isIgnoreMutex()) {
+                getMutex().execute(() -> {
+                    visitor.visitEstradaNormal(this);
+                });
+            } else {
+                visitor.visitEstradaNormal(this);
+            }
         } catch (Exception ex) {
             Logger.getLogger(EstradaNormal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void setProxima(AbstractEstrada proximaEstrada) {
+    public void setProxima(IEstrada proximaEstrada) {
         this.proxima = proximaEstrada;
     }
 
-    @Override
-    BufferedImage getImage() {
-        return Spritesheet.getInstance().getSprite(1, 1);
+    public IEstrada getProxima() {
+        if (proxima != null) {
+            return MainController.field.getEstrada(proxima.getPoint());
+        }
+        return null;
     }
 
+    BufferedImage getImage() {
+        return getStrategy().getImage();
+    }
 }
