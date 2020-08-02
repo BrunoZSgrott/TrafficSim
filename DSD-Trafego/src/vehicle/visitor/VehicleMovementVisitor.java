@@ -57,7 +57,7 @@ public class VehicleMovementVisitor implements IVisitor {
     @Override
     public void visitCruzamento(EstradaCruzamento estrada) throws Exception {
         if (defineTrajetoriaCruzamento) {
-            List<IEstrada> caminhos = estrada.getCaminho();
+            List<IEstrada> caminhos = estrada.getProximas();
             IEstrada caminho = caminhos.get(random.nextInt(caminhos.size()));
             vehicle.setProximaEstrada(caminho);
         } else {
@@ -95,7 +95,9 @@ public class VehicleMovementVisitor implements IVisitor {
             vehicle.setProximaEstrada(estrada.getProximaEstrada());
 
             if (vehicle.getProximaEstrada() != estrada) {
+                ((AbstractEstrada) estrada).setIgnoreMutex(true);
                 estrada.accept(new VehicleRemoverVisitor(vehicle));
+                ((AbstractEstrada) estrada).setIgnoreMutex(true);
             }
         } else {
             estrada.removerReserva();
@@ -103,6 +105,6 @@ public class VehicleMovementVisitor implements IVisitor {
     }
 
     private void collision(Vehicle carro, Vehicle carroEstrada) throws Exception {
-        throw new Exception(carro.getId() + " tentou ocupar a estrada do veiculo " + carroEstrada.getId());
+//        throw new Exception(carro.getId() + " tentou ocupar a estrada do veiculo " + carroEstrada.getId());
     }
 }

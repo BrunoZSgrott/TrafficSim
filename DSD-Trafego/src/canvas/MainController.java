@@ -30,7 +30,7 @@ public class MainController implements IDisplayController, Runnable, IVehicleMov
     private boolean spawn;
     private boolean running;
     private boolean isRunning;
-    private boolean paused = false;
+    public static boolean paused = false;
     private int carrosSpawnados = 0;
     private IVehicleController vehicleController;
     private ExecutorService vehicleControl;
@@ -67,7 +67,6 @@ public class MainController implements IDisplayController, Runnable, IVehicleMov
         thread.start();
         isRunning = true;
         spawn = true;
-        running = true;
     }
 
     public synchronized void stop() {
@@ -155,8 +154,7 @@ public class MainController implements IDisplayController, Runnable, IVehicleMov
                     }
                 });
                 carrosSpawnados--;
-                if (running && carrosSpawnados == 0 && !spawn) {
-                    running = false;
+                if (carrosSpawnados == 0 && !spawn) {
                     spawn = false;
                 }
             }
@@ -168,5 +166,15 @@ public class MainController implements IDisplayController, Runnable, IVehicleMov
     @Override
     public void pause() {
         paused = !paused;
+    }
+
+    @Override
+    public void end() {
+        isRunning = false;
+    }
+
+    @Override
+    public void endAndWait() {
+        this.spawn = false;
     }
 }

@@ -16,4 +16,8 @@ interface IDisplayController extends Subject {
     void run();
 
     void pause();
+
+    public void end();
+
+    public void endAndWait();
 }

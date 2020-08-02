@@ -5,23 +5,15 @@
  */
 package canvas;
 
-import roadMap.RoadMapFactory;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.input.KeyCode;
-import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import roadMap.RoadMap;
 import vehicle.Vehicle;
 
 /**
@@ -41,6 +33,7 @@ public class Display extends Canvas implements Observer, Runnable, KeyListener {
         controller = new MainController(config);
         renderable = new ArrayList<>();
         controller.addObservador(this);
+        addKeyListener(this);
     }
 
     public void render() {
@@ -96,26 +89,23 @@ public class Display extends Canvas implements Observer, Runnable, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyChar() == 'z'){
+        if (e.getKeyChar() == 'z') {
             controller.pause();
         }
-        if(e.getKeyChar() == 'x'){
-            
+        if (e.getKeyChar() == 'x') {
+            controller.endAndWait();
         }
-        if(e.getKeyChar() == 'c'){
-            
+        if (e.getKeyChar() == 'c') {
+            controller.end();
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

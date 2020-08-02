@@ -8,12 +8,9 @@ package canvas;
 import estrada.EstradaCaminho;
 import estrada.EstradaCruzamento;
 import estrada.EstradaEmpty;
-import estrada.EstradaMutexDecorator;
 import estrada.EstradaNormal;
 import estrada.IEstrada;
 import estrada.visitor.IVisitor;
-import java.util.ArrayList;
-import java.util.List;
 import mutex.factory.IMutexFactory;
 
 /**

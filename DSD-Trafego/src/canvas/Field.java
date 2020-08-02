@@ -49,7 +49,6 @@ public class Field implements IVisitable, IRenderable {
                 try {
                     estrada.accept(visitor);
                 } catch (Exception ex) {
-                    Logger.getLogger(Field.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         );

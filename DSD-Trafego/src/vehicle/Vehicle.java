@@ -9,6 +9,7 @@ import vehicle.visitor.VehicleMovementVisitor;
 import vehicle.visitor.VehicleStrategyFactory;
 import canvas.IRenderable;
 import canvas.Display;
+import canvas.MainController;
 import estrada.EstradaCaminho;
 import estrada.EstradaCruzamento;
 import estrada.IEstrada;
@@ -39,7 +40,6 @@ public class Vehicle extends Thread implements IRenderable {
                 nextEstrada.render(g);
             }
         }
-
     }
 
     private BufferedImage getImage() {
@@ -65,18 +65,20 @@ public class Vehicle extends Thread implements IRenderable {
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted() && (estrada != null || nextEstrada != null)) {
-            if (nextEstrada != null) {
-                move(new VehicleMovementVisitor(this), nextEstrada);
-            } else {
-                move(new VehicleMovementVisitor(this), estrada);
-                notifyUpdateEstrada(estrada.getPoint(), null);
-                estrada = null;
-            }
-            try {
-                sleep(turnVelocity);
-            } catch (Exception e) {
-            } finally {
-                turnVelocity = velocity;
+            if (!MainController.paused) {
+                if (nextEstrada != null) {
+                    move(new VehicleMovementVisitor(this), nextEstrada);
+                } else {
+                    move(new VehicleMovementVisitor(this), estrada);
+                    notifyUpdateEstrada(estrada.getPoint(), null);
+                    estrada = null;
+                }
+                try {
+                    sleep(turnVelocity);
+                } catch (Exception e) {
+                } finally {
+                    turnVelocity = velocity;
+                }
             }
         }
     }

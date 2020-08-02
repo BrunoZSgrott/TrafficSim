@@ -14,12 +14,10 @@ public class SemaphoreMutex implements IMutex {
     public void execute(ICommand command) throws Exception {
         try {
             mutex.acquire();
-            System.out.println("Entrou");
             command.execute();
         } catch (InterruptedException e) {  
             throw e;
         } finally {  
-            System.out.println("Liberou");
             mutex.release();
         }
     }
