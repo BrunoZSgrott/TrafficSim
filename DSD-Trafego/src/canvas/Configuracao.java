@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package canvas;
 
+import mutex.factory.MutexType;
 import roadMap.RoadMap;
 
 /**
@@ -16,11 +12,13 @@ class Configuracao {
     private final RoadMap roadMap;
     private int numCarros;
     private int spawnOffset;
+    private MutexType ctrl;
 
-    public Configuracao(RoadMap roadMap, int numCarros, int interval) {
+    public Configuracao(RoadMap roadMap, int numCarros, int interval, int mutex) {
         this.numCarros = numCarros;
         this.spawnOffset = interval;
         this.roadMap = roadMap;
+        this.ctrl = MutexType.getFromValue(mutex);
     }
 
     public int getNumCarros() {
@@ -40,4 +38,7 @@ class Configuracao {
         return roadMap;
     }
 
+    public MutexType getThreadControl() {
+        return ctrl;
+    }
 }

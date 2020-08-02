@@ -26,7 +26,7 @@ public class EstradaVisitorConnectRoad implements IVisitor {
 
     @Override
     public void visitEstradaNormal(EstradaNormal estrada) throws Exception {
-        Point point = new EstradaNormalMovementFactory().getInstance().create(estrada);
+        Point point = EstradaNormalMovementFactory.getInstance().create(estrada);
         IEstrada proximaEstrada;
         try {
             proximaEstrada = field.getEstrada(point);
@@ -41,7 +41,7 @@ public class EstradaVisitorConnectRoad implements IVisitor {
 
     @Override
     public void visitCruzamento(EstradaCruzamento estrada) throws Exception {
-        List<Point> nextPoints = new EstradaCruzamentoMovementFactory().getInstance().create(estrada);
+        List<Point> nextPoints = EstradaCruzamentoMovementFactory.getInstance().create(estrada);
         List<IEstrada> proximas;
         try {
             proximas = field.getEstrada(nextPoints);

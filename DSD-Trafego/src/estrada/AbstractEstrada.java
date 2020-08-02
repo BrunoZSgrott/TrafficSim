@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package estrada;
 
 import canvas.Display;
@@ -42,7 +37,7 @@ public abstract class AbstractEstrada implements IEstrada, IRenderable {
 
     @Override
     public void render(Graphics g) {
-        if (count == MainController.FPS * 10) {
+        if (count == MainController.FPS * 2) {
             count = 0;
             this.canRender = true;
         }
