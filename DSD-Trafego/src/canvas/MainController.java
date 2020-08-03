@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package canvas;
 
 import estrada.AbstractEstrada;
@@ -14,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 import mutex.factory.IMutexFactory;
 import mutex.factory.MonitorMutexFactory;
+import mutex.factory.MutexFactoryCreator;
 import mutex.factory.SemaphoreMutexFactory;
 import vehicle.IVehicleMovementObserver;
 import vehicle.Vehicle;
@@ -28,7 +24,6 @@ public class MainController implements IDisplayController, Runnable, IVehicleMov
     public static Field field;
     public static final double FPS = 60.0;
     private boolean spawn;
-    private boolean running;
     private boolean isRunning;
     public static boolean paused = false;
     private int carrosSpawnados = 0;
@@ -39,10 +34,10 @@ public class MainController implements IDisplayController, Runnable, IVehicleMov
 
     public MainController(Configuracao config) {
         this.config = config;
-        IMutexFactory factory = new SemaphoreMutexFactory();
-        vehicleController = new VehicleController(factory.create());
+        IMutexFactory mutexFactory = MutexFactoryCreator.create(config.getThreadControl());
+        vehicleController = new VehicleController(mutexFactory.create());
 
-        FieldFactory fieldFactory = new FieldFactory(factory);
+        FieldFactory fieldFactory = new FieldFactory(mutexFactory);
         field = fieldFactory.create(config.getRoadMap());
         this.vehicleControl = Executors.newFixedThreadPool(config.getNumCarros());
     }
@@ -117,10 +112,12 @@ public class MainController implements IDisplayController, Runnable, IVehicleMov
             lastTime = now;
             if (delta >= 1) {
                 currentFrame++;
-                if (currentFrame % config.calcOffsetAsFrames() == 0) {
+                if (currentFrame == config.calcOffsetAsFrames()) {
                     tick();
+                    currentFrame = 0;
                 }
                 notifyRender();
+                delta--;
             }
         }
         stop();

@@ -10,11 +10,6 @@ import java.util.List;
 import roadMap.RoadMap;
 import roadMap.RoadMapFactory;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Bruno Zilli Sgrott
@@ -36,8 +31,8 @@ class ControllerConfig {
         observados.remove(obs);
     }
 
-    void start(String veiculos, String interval) {
-        new Display(new Configuracao(this.roadMap, Integer.parseInt(veiculos), Integer.parseInt(interval))).start();
+    void start(String veiculos, String interval, int Type) {
+        new Display(new Configuracao(this.roadMap, Integer.parseInt(veiculos), Integer.parseInt(interval), Type)).start();
     }
 
     void setRoadMapData(File selectedFile) throws FileNotFoundException {
